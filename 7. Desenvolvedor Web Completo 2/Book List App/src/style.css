@@ -233,6 +233,8 @@ table tr th {
 }
  
 .book .book-cover button.isRead {
+  visibility: visible;
+  opacity: 1;
   background-color: #1cab47;
 }
  
@@ -285,6 +287,10 @@ table tr th {
 .books-read {
   padding-top: 60px;
   text-align: center;
+}
+
+.icon {
+  padding-right: 8px;
 }
  
 @media (max-width: 768px) {

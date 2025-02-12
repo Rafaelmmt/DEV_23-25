@@ -44,22 +44,33 @@
       <label for="readIt">I have read it already</label>
     </div>
     
-    <button type="submit" class="btn btn-block" @click.prevent="addBook()" >Save Book</button>
+    <button type="submit" class="btn btn-block" @click.prevent="addBook" >Save Book</button>
+
+    <pre>{{ listaLivros }}</pre>
+    <pre>{{ maiorId }}</pre>
   
   </form>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { defineEmits } from 'vue'
+import { type Book } from './books'
 
 // PROPS e EMITS
+const props = defineProps<{
+  listaLivros: Book[]
+  //readItFunction:(livro:Book)=>void
+}>()
+
 const emit = defineEmits<{
   (e:'closeAddPage'):void
   (e:'novoLivro', Book: any):void
 }>()
 
-const id = ref<number>(4)
+const maiorId = computed(() => props.listaLivros.reduce((max, livros) => (livros.id > max ? livros.id : max), props.listaLivros[0]?.id ?? 0))
+const nextId = computed(() => maiorId.value + 1) 
+const id = ref<number>(nextId.value)
 const title = ref<string|null>(null)
 const cover = ref<string|null>(null)
 const isRead = ref<boolean>(false)
@@ -79,8 +90,9 @@ const addBook = () => {
   } else if (!isbn.value) {
     alert('O ISBN do livro deve ser informado!')
   }else {
+    
     let newBook = {
-      id:id.value,
+      id:id.value ++,
       title: title.value,
       cover: cover.value,
       isRead: isRead.value,
@@ -88,7 +100,10 @@ const addBook = () => {
       isbn: isbn.value
       
     }
-    emit('novoLivro', {Book: newBook}) 
+
+    emit('novoLivro', newBook) 
+
+    emit('closeAddPage')
   } 
 }
 </script>

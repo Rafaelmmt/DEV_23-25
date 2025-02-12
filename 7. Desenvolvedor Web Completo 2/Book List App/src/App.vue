@@ -2,8 +2,10 @@
   
   <!-- PÁGINA "ADICIONAR LIVRO"  -->
   <div class="container" v-if="showPage === 'add'">
-    <BooksAddPage 
+    <BooksAddPage
+      :listaLivros="books" 
       @close-add-page="showPage = 'books'"
+      @novo-livro="addNovoLivro"
     />
   </div>
   
@@ -41,6 +43,11 @@ const books = ref<Book[]>([...booksList])
 // FUNÇÃO "LIDO-NÃO LIDO"
 const readItFunction = (livro:Book) => {
   livro.isRead = !livro.isRead
+}
+
+// FUNÇÃO ADICIONAR NOVO LIVRO 
+const addNovoLivro = (newBook:any) => {
+  books.value.push(newBook)
 }
 </script>
 

@@ -201,6 +201,7 @@ table tr th {
  
 .book .book-cover {
   position: relative;
+  max-height: 460px;
 }
 .book .book-cover img {
   width: 100%;

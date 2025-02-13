@@ -1,50 +1,48 @@
 <template>
 
-  <h1>📖 Add a new Book</h1>
+  <h1>📖 Adicionar Novo Livro</h1>
     
   <div class="header-btns">
-    <button class="btn" @click="$emit('closeAddPage')">
-      Close x
-    </button>
+    <button class="btn" @click="$emit('closeAddPage')">Fechar</button>
   </div>
 
   <form class="add-form">
     
     <div class="form-control">  
-      <label>Title</label>
+      <label>Título</label>
       <input
         type="text" name="text"
-        placeholder="Add Book Title"
+        placeholder="Adicionar o título do livro"
         v-model="title"
 
       />
     </div>
 
     <div class="form-control">
-      <label>Book Cover</label>
-      <input type="text" name="cover" placeholder="Add Cover" v-model="cover" />
+      <label>Capa</label>
+      <input type="text" name="cover" placeholder="Adicionar URL de imagem da capa do livro" v-model="cover" />
     </div>
 
     <div class="form-control">
-      <label>Author</label>
+      <label>Autor</label>
       <input
         type="text" name="author"
-        placeholder="Add Author"
+        placeholder="Adicionar autor do livro"
         v-model="author"
       />
     </div>
 
     <div class="form-control">
       <label>ISBN#</label>
-      <input type="text" name="isbn" placeholder="Add ISBN" v-model="isbn" />
+      <input type="text" name="isbn" placeholder="Adicionar ISBN" v-model="isbn" />
     </div>
 
     <div class="form-control form-control-check">
       <input type="checkbox" name="readIt" id="readIt" v-model="isRead" />
-      <label for="readIt">I have read it already</label>
+      <label for="readIt">Já li</label>
     </div>
     
-    <button type="submit" class="btn btn-block" @click.prevent="addBook" >Save Book</button>
+    <button type="submit" class="btn btn-block" @click.prevent="addBook" >Adicionar Livro</button>
   
   </form>
 </template>

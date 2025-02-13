@@ -1,12 +1,13 @@
 <template>
   
   <h1>📖 Estante Virtual</h1>
+  
   <div class="header-btns">
     <button class="btn" @click="$emit('addClick')">
       Adicionar Livro +
     </button>
     <button class="btn" @click="tableView = !tableView">
-      Visualizar Lista
+      {{ !tableView ? 'Modo Lista' : 'Modo Blocos' }}
     </button>
   </div>
 
@@ -50,10 +51,10 @@
     <table>
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Author</th>
+          <th>Título</th>
+          <th>Autor</th>
           <th>ISBN#</th>
-          <th>Read it?</th>
+          <th>Lido</th>
         </tr>
       </thead>
       <tbody>

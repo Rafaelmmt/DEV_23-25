@@ -1,7 +1,7 @@
 <template>
 
   <div class="books-read">
-    <label for="progress">Your Progress</label>
+    <label for="progress">Seu Progresso:</label>
     <br>
     <progress :value="progressBar" max="100"></progress>
     <p>{{ progressMsg }}</p>

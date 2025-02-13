@@ -5,12 +5,12 @@
     <button class="btn" @click="$emit('addClick')">
       Adicionar Livro +
     </button>
-    <button class="btn" @click="$emit('listClick')">
+    <button class="btn" @click="tableView = !tableView">
       Visualizar Lista
     </button>
   </div>
 
-  <div class="books-container">
+  <div class="books-container" v-if="!tableView">  
     <div class="books-list">
 
       <!-- LIVROS >>> v-FOR BOOKLIST -->
@@ -46,10 +46,30 @@
 
     </div>
   </div>
+  <div class="books-container" v-else-if="tableView">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>ISBN#</th>
+          <th>Read it?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="livro in listaLivros" :key="livro.id">
+          <td>{{ livro.title }}</td>
+          <td>{{ livro.author }}</td>
+          <td>{{ livro.isbn }}</td>
+          <td><input type="checkbox" id="checkbox" v-model="livro.isRead" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { type Book } from './books'
 
 // PROPS e EMITS
@@ -62,5 +82,7 @@ defineEmits<{
   (e:'addClick'):void
   (e:'listClick'):void
 }>()
+
+const tableView = ref(false)
 
 </script>

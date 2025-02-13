@@ -16,14 +16,12 @@
       :listaLivros="books" 
       @callReadItFunction="readItFunction"
       @add-click="showPage = 'add'"
-      @list-click="showPage = 'list'" 
     />
+
+    <BookProgressBar :listaLivros="books" />
+
   </div>
 
-    <!-- PÁGINA "VISUALIZAR LIVROS" -->
-  <div class="container" v-else-if="showPage === 'list'">
-    VISUALIZAR LIVROS
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -33,9 +31,10 @@ import { booksList, type Book } from './components/books'
 // IMPORTAR COMPONENTES
 import BooksSection from './components/BooksSection.vue'
 import BooksAddPage from './components/BooksAddPage.vue'
+import BookProgressBar from './components/BookProgressBar.vue'
 
 // NAVEGAÇÃO PÁGINAS
-const showPage = ref<'books' | 'add' | 'list'>('books') 
+const showPage = ref<'books'|'add'>('books') 
 
 // CÓPIA REATIVA DA LISTA IMPORTADA
 const books = ref<Book[]>([...booksList])

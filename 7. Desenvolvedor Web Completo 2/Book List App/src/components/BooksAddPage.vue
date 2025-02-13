@@ -45,9 +45,6 @@
     </div>
     
     <button type="submit" class="btn btn-block" @click.prevent="addBook" >Save Book</button>
-
-    <pre>{{ listaLivros }}</pre>
-    <pre>{{ maiorId }}</pre>
   
   </form>
 </template>

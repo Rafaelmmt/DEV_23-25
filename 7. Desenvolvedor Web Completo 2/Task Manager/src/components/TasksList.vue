@@ -3,7 +3,7 @@
     <h3>{{ task.id }} : {{ task.name }}</h3>
     <p>{{ task.description }}</p>
     <div class="task-check">
-      <input type="checkbox" :checked="task.completed" />
+      <input type="checkbox" :checked="task.completed" @click="$emit('checkTask', task.id)" />
       <label>{{ task.completed ? 'Done' : 'To Do' }}</label>
     </div>
   </div>

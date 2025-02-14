@@ -27,7 +27,11 @@
     </div>
 
     <div class="tasks">
-      <TasksList v-for="(task, index) in tasks" :task="task" :key="index" />
+      <TasksList 
+        v-for="(task, index) in tasks" :key="index" 
+        :task="task"
+        @checkTask="onCheckTask"
+      />
     </div>
 
     <div class="add-task">
@@ -107,14 +111,33 @@ const tasks = reactive([
 
 // Função ADD NEW TASK
 const newTask = reactive({id: 1, name: '', description:'', completed: false})
+
 const addTask = () => {
+  
   if(newTask.name && newTask.description) {
+    
+    const nextId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) : 0
+    newTask.id = nextId + 1
+    
     tasks.push({...newTask})
+    
     Object.assign(newTask, { name: '', description: '', completed: false })
+  
   } else {
+    
     alert('Please enter the title and description for the task.')
+  
   }
 }
+
+// FUNÇÃO "CHECK" TASKS
+const onCheckTask = (paramRecebido) => {
+  tasks.forEach(objeto => {
+    if(objeto.id === paramRecebido) {
+      objeto.completed = !objeto.completed
+    }
+  })
+}  
 
 
 </script>

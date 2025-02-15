@@ -3,60 +3,41 @@
 
     <div class="header">
       <div class="header-side">
-        <h1>
-          {{ appName }}
-        </h1>
+        <h1>{{ appName }}</h1>
+      </div>
+      <div class="header-side">
+        <button class="btn secondary" @click="showModal = true">+ Add Task</button>
       </div>
     </div>
     
-    <div class="filters">
-      <div>
-        <p>Filter by state</p>
-        <div class="badges">
-          <div class="badge">
-            To-Do
-          </div>
-          <div class="badge">
-            Done
-          </div>
-          <span class="clear">
-            x clear
-          </span>
-        </div>
-      </div>
-    </div>
+    <FiltersComp 
+      :filterBy="filterBy"
+      @setFilter="setFilter" 
+    />
 
     <div class="tasks">
       <TasksList 
-        v-for="(task, index) in tasks" :key="index" 
+        v-for="(task, index) in filteredTasks" :key="index" 
         :task="task"
         @checkTask="onCheckTask"
       />
     </div>
 
-    <div class="add-task">
-      <h3>Add a new task</h3>
-      <input 
-        type="text" name="title" 
-        placeholder="Enter a title..."
-        v-model="newTask.name"
-      ><br>
-      <textarea 
-        name="description" rows="4" 
-        placeholder="Enter a description..."
-        v-model="newTask.description" 
-      ></textarea><br>
-      <button class="btn gray" @click="addTask">Add Task</button>
-    </div>
-
+    <ModalComp 
+      v-if="showModal"
+      @closeModal="closeModal"
+    />
   </main>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
 // IMPORTAR COMPONENTES
 import TasksList from './components/TasksList.vue'
+import FiltersComp from './components/FiltersComp.vue'
+import AddTask from './components/AddTask.vue'
+import ModalComp from './components/ModalComp.vue'
 
 // REF
 // USAR REF PARA PRIMITIVES (STRINGS, NUMBERS, BOOLEANS...)
@@ -109,6 +90,15 @@ const tasks = reactive([
   }
 ])
 
+// FUNÇÃO "CHECK" TASKS
+const onCheckTask = (paramRecebido) => {
+  tasks.forEach(objeto => {
+    if(objeto.id === paramRecebido) {
+      objeto.completed = !objeto.completed
+    }
+  })
+}
+
 // Função ADD NEW TASK
 const newTask = reactive({id: 1, name: '', description:'', completed: false})
 
@@ -130,20 +120,35 @@ const addTask = () => {
   }
 }
 
-// FUNÇÃO "CHECK" TASKS
-const onCheckTask = (paramRecebido) => {
-  tasks.forEach(objeto => {
-    if(objeto.id === paramRecebido) {
-      objeto.completed = !objeto.completed
-    }
-  })
-}  
+// FILTER
+const filterBy = ref('')
 
+const setFilter = (value) => {
+  filterBy.value = value
+}
+
+const filteredTasks = computed(() => {
+  switch(filterBy.value){
+    case 'todo':
+      return tasks.filter(task => !task.completed)
+      break
+    case 'done':
+      return tasks.filter(task => task.completed)
+      break
+    default:
+      return tasks
+  }
+})
+
+const showModal = ref(false)
+
+const closeModal = () => {
+  showModal.value = false
+}
 
 </script>
 
 <style lang="scss" scoped>
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -168,39 +173,6 @@ const onCheckTask = (paramRecebido) => {
   }
 
 }
-
-.filters {
-  display: flex;
-  flex-direction: column;
-  margin: 40px 0;
-
-  p {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: 0em;
-    text-align: left;
-  }
-
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin: 14px 0;
-    align-items: center;
-  }
-
-  .clear {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    text-align: left;
-    cursor: pointer;
-  }
-
-}
-
 .tasks {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -210,22 +182,4 @@ const onCheckTask = (paramRecebido) => {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-
-.add-task {
-  margin-top: 60px;
-
-  input, textarea {
-    width: 360px;
-    max-width: 100%;
-    margin-top: 12px;
-    padding: 5px;
-  }
-
-  button {
-    width: 360px;
-    margin-top: 12px;
-  }
-}
-
-
 </style>

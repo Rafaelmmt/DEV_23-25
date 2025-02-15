@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    <h3>{{ task.id }} : {{ task.name }}</h3>
+    <h3>{{ task.name }}</h3>
     <p>{{ task.description }}</p>
     <div class="task-check">
       <input type="checkbox" :checked="task.completed" @click="$emit('checkTask', task.id)" />
@@ -34,7 +34,7 @@ const props = defineProps(['task'])
 
   p {
     margin-top: 24px;
-    margin-bottom: 12px;
+    margin-bottom: 40px;
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
@@ -48,8 +48,8 @@ const props = defineProps(['task'])
     align-items: center;
     justify-content: center;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
 
     label {
       font-size: 13px;

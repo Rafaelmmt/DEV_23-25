@@ -4,22 +4,22 @@
     <div class="badges">
       <div 
         class="badge" 
-        :class="{selected : filterBy === 'todo'}"
-        @click="$emit('setFilter', 'todo')"
+        :class="{selected : store.filterBy === 'todo'}"
+        @click="store.setFilter('todo')"
       >
         To-Do
       </div>
       <div 
         class="badge" 
-        :class="{selected : filterBy === 'done'}"
-        @click="$emit('setFilter', 'done')"
+        :class="{selected : store.filterBy === 'done'}"
+        @click="store.setFilter('done')"
       >
         Done
       </div>
       <span 
-        v-if="filterBy" 
+        v-if="store.filterBy" 
         class="clear"
-        @click="$emit('setFilter', '')"
+        @click="store.setFilter('')"
       >
         x clear
       </span>
@@ -28,7 +28,9 @@
 </template>
 
 <script setup>
-const props = defineProps(['filterBy'])
+// IMPORTAR PINIA STORE
+import { useStore } from '../store/store'
+const store = useStore()
 </script>
 
 <style lang="scss" scoped>

@@ -1,10 +1,13 @@
-import "./assets/reset.css";
-import "./assets/main.css";
+import "./assets/reset.css"
+import "./assets/main.css"
 
-import { createApp } from "vue";
+import { createApp } from "vue"
+import { createPinia } from "pinia"
 
-import App from "./App.vue";
+import App from "./App.vue"
 
-const app = createApp(App);
+const pinia = createPinia()
+const app = createApp(App)
 
-app.mount("#app");
+app.use(pinia)
+app.mount("#app")

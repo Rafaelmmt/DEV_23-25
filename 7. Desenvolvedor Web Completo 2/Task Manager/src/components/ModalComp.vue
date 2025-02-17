@@ -8,7 +8,18 @@
       </button>
 
       <div class="form">
-        Your popup content goes here
+        <div class="add-task">
+          <h3>Add a new task</h3>
+          <input 
+            type="text" name="title" 
+            placeholder="Enter a title..."
+          ><br>
+          <textarea 
+            name="description" rows="4" 
+            placeholder="Enter a description..."
+          ></textarea><br>
+          <button class="btn gray">Add Task</button>
+        </div>
       </div>
 
     </div>
@@ -30,7 +41,6 @@
   
     .inner {
       background-color: white;
-      padding: 30px;
       border-radius: 12px;
       display: flex;
       flex-direction: column;
@@ -42,6 +52,7 @@
         font-size: 16px;
         font-weight: 700;
         line-height: 21px;
+        margin-left: 20px;
         margin-bottom: 20px;
       }
   
@@ -64,6 +75,7 @@
           line-height: 16px;
           letter-spacing: 0em;
           text-align: left;
+          padding: 0 20px;
         }
  
         input,
@@ -76,15 +88,11 @@
           text-align: left;
           border: 1px solid #C2C2C2;
           border-radius: 4px;
-          padding: 8px 12px;
-          margin-top: 5px;
  
           &::placeholder {
             color: #A6A6A6;
           }
         }
-  
-        
   
         .btn {
           width: fit-content;
@@ -92,5 +100,20 @@
         }
       }
     }
+}
+.add-task {
+  padding: 20px 20px 30px 10px;
+
+  input, textarea {
+    width: 100%;
+    margin: 5px;
+    padding: 12px;
   }
+
+  button {
+    width: 360px;
+    margin-top: 12px;
+    margin-left: 8px;
+  }
+}
 </style>

@@ -11,18 +11,10 @@
     </div>
     
     <FiltersComp />
+    <TasksList />
 
-    <div class="tasks">
-      <TasksList 
-        v-for="(task, index) in store.filteredTasks" :key="index" 
-        :task="task"
-      />
-    </div>
+    <ModalComp v-if="store.showModal" />
 
-    <ModalComp 
-      v-if="store.showModal"
-      @click="store.closeModal"
-    />
   </main>
 </template>
 
@@ -35,6 +27,10 @@ import ModalComp from './components/ModalComp.vue'
 // IMPORTAR PINIA STORE
 import { useStore } from './store/store'
 const store = useStore()
+
+store.$subscribe((mutation, state) => {
+  localStorage.setItem('tasks', JSON.stringify(state.tasks))
+})
 
 // REF
 // USAR REF PARA PRIMITIVES (STRINGS, NUMBERS, BOOLEANS...)
@@ -113,13 +109,5 @@ const store = useStore()
   }
 
 }
-.tasks {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
 
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
 </style>

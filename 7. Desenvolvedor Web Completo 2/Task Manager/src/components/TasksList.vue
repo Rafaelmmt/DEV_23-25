@@ -1,10 +1,12 @@
 <template>
-  <div class="task">
-    <h3>{{ task.name }}</h3>
-    <p>{{ task.description }}</p>
-    <div class="task-check">
-      <input type="checkbox" :checked="task.completed" @click="$emit('checkTask', task.id)" />
-      <label>{{ task.completed ? 'Done' : 'To Do' }}</label>
+  <div class="tasks">
+    <div class="task" v-for="(task) in store.filteredTasks" :key="task.id" >
+      <h3>{{ task.name }}</h3>
+      <p>{{ task.description }}</p>
+      <div class="task-check">
+        <input type="checkbox" :checked="task.completed" @click="store.onCheckTask(task.id)" />
+        <label>{{ task.completed ? 'Done' : 'To Do' }}</label>
+      </div>
     </div>
   </div>
 </template>
@@ -12,10 +14,18 @@
 <script setup>
 import { useStore } from '../store/store';
 const store = useStore()
-const props = defineProps(['task'])
 </script>
 
 <style lang="scss" scoped>
+.tasks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 .task {
   display: flex;
   flex-direction: column;

@@ -1,7 +1,7 @@
 <template>
   <div class="modal-wrapper" aria-modal="true" role="dialog" tabindex="-1">
     <div class="inner">      
-      <button class="close-btn" @click="$emit('closeModal')">
+      <button class="close-btn" @click="store.closeModal">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
           <path fill="currentColor" d="M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z" />
         </svg>
@@ -13,18 +13,26 @@
           <input 
             type="text" name="title" 
             placeholder="Enter a title..."
+            v-model="store.newTask.name"
           ><br>
           <textarea 
             name="description" rows="4" 
             placeholder="Enter a description..."
+            v-model="store.newTask.description"
           ></textarea><br>
-          <button class="btn gray">Add Task</button>
+          <button class="btn gray" @click="store.addTask()">Add Task</button>
         </div>
       </div>
 
     </div>
   </div>
 </template>
+
+<script setup>
+// IMPORTAR PINIA STORE
+import { useStore } from '../store/store';
+const store = useStore()
+</script>
 
 <style lang="scss" scoped>
 .modal-wrapper {

@@ -4,15 +4,15 @@
       <q-select
         class="col-4 q-mx-md q-mb-md"
         label="Nota"
-        v-model="temp"
-        :options="temp02"
+        v-model="teste02.nome"
+        :options="selectOptions('nome', filmes, teste02)"
         clearable
       />
       <q-select
         class="col-4 q-mx-md"
         label="Data"
-        v-model="temp"
-        :options="temp02"
+        v-model="teste02.ano"
+        :options="selectOptions('ano', filmes, teste02)"
         clearable
       />
 
@@ -25,12 +25,18 @@
       :rows="tabelaFiltrada(filmes, teste02)"
       :columns="columns"
     />
-    
+    <div class="q-mt-md">
+      <q-btn @click="goTo('/')">Página Inicial</q-btn>
+      <pre>{{ teste02 }}</pre>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const temp = ref('')
 const temp02 = reactive([1,2,3,4])
@@ -59,25 +65,22 @@ const filmes = reactive([
   { id: 15, nome: 'Gladiador', ano: 2000, nota: 8.5, diretor: 'Ridley Scott', info01: 'A', info02: 'XXX', info03: 'filme tipo 1', info04: 'filme gênero A' }
 ])
 
-// const selectOptions = () => {}
-
-const tabelaFiltrada = (tabela, objFiltro) => {
-  return tabela.filter(itemTabela => {
-    return Object.keys(objFiltro).every(key => !objFiltro[key] || itemTabela[key] === objFiltro[key])
-  })
+const aplicarFiltro = (item, objFiltro) => {
+  return Object.keys(objFiltro).every(key => !objFiltro[key] || item[key] === objFiltro[key])
 }
 
-const teste02 = ref({nota:''})
+const selectOptions = (itemTabela, tabela, objFiltro) => {
+  const filtroArray = tabela.filter(item => aplicarFiltro(item, objFiltro))
+  return [...new Set(filtroArray.map(option => option[itemTabela]))].sort()
+}
 
+const tabelaFiltrada = (tabela, objFiltro) => {
+  return tabela.filter(item => aplicarFiltro(item, objFiltro))
+}
 
-// selectOptions (campos, array, model) {
-//       const filtroArray = array.filter(item => Object.keys(model).every(key => !model[key] || item[key] === model[key]))
-//       return [...new Set(filtroArray.map(option => option[campos]))].sort()
-//     },
+const teste02 = ref({})
 
-//     filtroTabela(array, model) {
-//       return array.filter(item => { 
-//         return Object.keys(model).every(key => !model[key] || item[key] === model[key])
-//       })
-//     }, 
+const goTo = (rota) => {
+  router.push(rota)
+}
 </script>

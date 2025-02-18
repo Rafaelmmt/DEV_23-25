@@ -1,6 +1,6 @@
 <template>
-  <div class="full-width q-pa-xl">
-    
+  <div class="full-width q-px-xl">
+
     <!-- TABELA -->
     <q-table
       title="FILMES"
@@ -73,9 +73,9 @@
             <q-card-section class="q-pt-none">Data</q-card-section>
           </q-card>
 
-          
+
         </div>
-      
+
       </div>
 
     </q-dialog>
@@ -98,7 +98,7 @@ const columns = ref([
   { name: 'diretor', label: 'Diretor', field: 'diretor', sortable: true, align: 'center' },
   { name: 'ano', label: 'Data de Lançamento', field:'ano', sortable: true, align: 'center' },
   { name: 'nota', label: 'Nota Site', field: 'nota', sortable: true, align: 'center' }
-  
+
 ])
 
 const filterTable = ref(null)
@@ -108,7 +108,7 @@ const selectedRow = ref({})
 const openDialog = (row) => {
   modelDialog.value = true
   selectedRow.value = row
-} 
+}
 
 const wrapCsvValue = (val, formatFn, row) => {
   let formatted = formatFn !== void 0
@@ -149,7 +149,7 @@ const exportTable = () => {
   }
 }*/
 
-// FUNÇÃO CONSIDERANDO PESQUISA POR CAMPOS + FILTRO 
+// FUNÇÃO CONSIDERANDO PESQUISA POR CAMPOS + FILTRO
 const exportTable = () => {
   const filteredRows = store.opFiltrada().filter(row => {
     const searchTerm = filterTable.value ? filterTable.value.toLowerCase() : '';
@@ -182,7 +182,7 @@ const exportTable = () => {
   }
 }
 
-// Limpar filtro tabela 
+// Limpar filtro tabela
 watch(store.opSelecionada, () => {
   filterTable.value = null
 })

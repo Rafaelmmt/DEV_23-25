@@ -12,6 +12,7 @@ export const useStoreAuth = defineStore('storeAuth', {
   },
 
   actions: {
+    
     // USUÁRIO ID
     usuarioID() {
       const storeNotes = useStoreNotes()
@@ -28,6 +29,7 @@ export const useStoreAuth = defineStore('storeAuth', {
         }
       })
     },
+    
     // REGISTRO DO USUÁRIO
     registerUser(dados) {
       createUserWithEmailAndPassword(auth, dados.email, dados.password).then((userCredential) => {

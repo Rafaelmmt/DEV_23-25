@@ -64,6 +64,7 @@ var products = [
     }
 ];
 
+//
 const SelfServiceMachine = {
     data() {
         return {

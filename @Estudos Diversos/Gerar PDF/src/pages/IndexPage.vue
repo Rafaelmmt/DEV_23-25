@@ -5,9 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import pdfMake from "pdfmake/build/pdfmake"
-import pdfFonts from "pdfmake/build/vfs_fonts"
-pdfMake.vfs = vfsFonts.pdfMake.vfs
+import pdfMake from "pdfmake/build/pdfmake";
+import "pdfmake/build/vfs_fonts";
 
 const gerarPdf = () => {
 

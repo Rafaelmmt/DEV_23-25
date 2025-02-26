@@ -1,0 +1,21 @@
+// app global css in SCSS form
+.custom-page {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 60px 120px; 
+}
+.custom-card {
+  min-height: 500px;
+  padding-top: 24px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-bottom: 16px;
+  color: $grey-8;
+}
+.custom-title {
+  font-size: 1.6em;
+  font-weight: 300;
+}
+.custom-content {
+  font-size: 1.2em;
+}

@@ -13,4 +13,5 @@ Lista dos cursos:
   <li>Desenvolvedor Web Completo 2 (Instrutor: Ivan Lourenço Gomes - Disponínel em: https://www.udemy.com/course/get-started-with-html-css-the-frontend-developer-bootcamp/)</li>
   <li>Complete JavaScript Course 2024 (Instrutor: Jonas Schmedtmann - Disponínel em: https://www.udemy.com/course/the-complete-javascript-course/)</li>
   <li>ZTM - Vue Developer Bootcamp (Instrutores: Andrei Neagoie e Luis Ramirez Jr. - Disponínel em: https://www.udemy.com/course/complete-vue-js-developer-zero-to-mastery-vuex/)</li>
+  <li>GraphQL - Criando APIs Profissionais e Flexíveis (Instrutor: Leonardo Moura Leitao | Cod3r Cursos Online - Disponínel em: https://www.udemy.com/course/graphql-criando-apis-profissionais-e-flexiveis/)</li>
 </ul>

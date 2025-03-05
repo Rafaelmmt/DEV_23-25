@@ -3,20 +3,65 @@ import { startStandaloneServer } from '@apollo/server/standalone'
 
 // 1. DEFINE O SCHEMA DO GRAPHQL
 const typeDefs = ` 
+  
+  type Produto {
+    nome: String!
+    preco: Float!
+    desconto: Float
+    precoComDesconto: String
+  }
+
+  type Obj {
+    id: ID!
+    descricao: String!
+    chaveestrangeira: ID
+  }
+
   type Query {
     hello: String
     horaAtual: String
     age: Int
+    produtoEmDestaque: Produto
+    arrayNumeros: [Int!]!
+    listaObj(id:ID): Obj
   }
 `
-
+const numerais = [ 5, 20, 32, 55, 98, 150 ]
+const objetos = [
+  { id: 1, descricao: 'camiseta', chaveEstrangeira: 3  },
+  { id: 2, descricao: 'calça', chaveEstrangeira: 5  },
+  { id: 3, descricao: 'chapéu', chaveEstrangeira: 1  },
+  { id: 4, descricao: 'óculos', chaveEstrangeira: 2  },
+  { id: 5, descricao: 'sapato', chaveEstrangeira: 4  }
+]
 // 2. IMPLEMENTA OS RESOLVERS
 const resolvers = {
+  
+  Produto: {
+    precoComDesconto(obj:any) {
+      if(obj.desconto) {
+        return `R$ ${obj.preco * (1 - obj.desconto)}`
+      } else {
+        return `R$ ${obj.preco}`  
+      }
+    }
+  },
+
   Query: {
     hello: () => 'Olá, mundo!',
     horaAtual: () => `${new Date}`,
-    age: () => 45
-  },
+    age: () => 45,
+    produtoEmDestaque: () => ({ nome: 'Notebook Gamer', preco: 4890.89, desconto: 0.15 }),
+    arrayNumeros: () => {
+      const crescente = (a:number,b:number) => b-a
+      return numerais.sort(crescente)
+    },
+    listaObj: (_:any,args:any) => {
+      const temp = objetos.filter(x => x.id == args.id)
+      return temp ? temp[0] : null
+    }
+  }
+
 }
 
 // 3. CRIAR UM INSTÂNCIA DO APOLLO SERVER

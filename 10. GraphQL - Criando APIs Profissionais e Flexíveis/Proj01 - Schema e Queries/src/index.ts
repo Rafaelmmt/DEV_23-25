@@ -1,5 +1,6 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
+import { usuarios, perfilUsuario } from './usuarios'
 
 // 1. DEFINE O SCHEMA DO GRAPHQL
 const typeDefs = ` 
@@ -15,6 +16,18 @@ const typeDefs = `
     id: ID!
     descricao: String!
     chaveestrangeira: ID
+  }
+
+  type Perfil {
+    id: Int
+    nomr: String
+  }
+
+  type Usuario {
+    id: Int
+    nome: String
+    idade: Int
+    perfil: Perfil
   }
 
   type Query {
@@ -47,6 +60,13 @@ const resolvers = {
     }
   },
 
+  Usuario: {
+    perfil(usuario) {
+      const sels = perfilUsuario.filter(p => p.id === usuario.perfil_id)
+      return sels ? sels[0] : null
+    }
+  },
+
   Query: {
     hello: () => 'Olá, mundo!',
     horaAtual: () => `${new Date}`,
@@ -59,7 +79,8 @@ const resolvers = {
     listaObj: (_:any,args:any) => {
       const temp = objetos.filter(x => x.id == args.id)
       return temp ? temp[0] : null
-    }
+    },
+    usuario: () => 
   }
 
 }

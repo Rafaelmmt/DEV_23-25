@@ -14,4 +14,6 @@ Lista dos cursos:
   <li>Complete JavaScript Course 2024 (Instrutor: Jonas Schmedtmann - Disponínel em: https://www.udemy.com/course/the-complete-javascript-course/)</li>
   <li>ZTM - Vue Developer Bootcamp (Instrutores: Andrei Neagoie e Luis Ramirez Jr. - Disponínel em: https://www.udemy.com/course/complete-vue-js-developer-zero-to-mastery-vuex/)</li>
   <li>GraphQL - Criando APIs Profissionais e Flexíveis (Instrutor: Leonardo Moura Leitao | Cod3r Cursos Online - Disponínel em: https://www.udemy.com/course/graphql-criando-apis-profissionais-e-flexiveis/)</li>
+  <li>Curso de JavaScript e TypeScript do básico ao avançado JS/TS (Instrutores: Luiz Otávio Miranda e Tales Calogi Malaquias - Disponínel em: https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/)</li>
+  <li>Curso de GraphQL e Apollo Server com Apollo Client completo (Instrutores: Luiz Otávio Miranda e Tales Calogi Malaquias - Disponínel em: https://www.udemy.com/course/curso-de-graphql-e-apollo-server-client/)</li>
 </ul>

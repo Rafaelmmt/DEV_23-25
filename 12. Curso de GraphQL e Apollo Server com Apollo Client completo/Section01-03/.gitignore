@@ -1,0 +1,25 @@
+# Ignorar a pasta node_modules (dependências instaladas)
+node_modules/
+
+# Ignorar a pasta dist (código compilado do TypeScript)
+dist/
+
+# Ignorar arquivos de ambiente local (como .env)
+.env
+.env.local
+
+# Ignorar logs
+*.log
+
+# Ignorar configurações do IDE/Editor
+.vscode/
+.idea/
+
+# Ignorar arquivos de sistema
+.DS_Store
+
+# Ignorar arquivos de cache do npm/yarn
+.npm
+.yarn
+.yarnrc
+.pnpm-store/

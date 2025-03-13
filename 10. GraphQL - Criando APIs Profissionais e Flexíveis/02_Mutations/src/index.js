@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 
 // 1. DEFINE O SCHEMA DO GRAPHQL
-const typeDefs = `
+const typeDefs = `#graphql
 
   type Perfil {
     id: Int

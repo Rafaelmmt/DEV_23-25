@@ -2,24 +2,10 @@ import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 
 // 1. DEFINE O SCHEMA DO GRAPHQL
-const typeDefs = `#graphql
-
-  type Usuario {
-    id: Int
-    nome: String!
-    email: String!
-  }
-
-  type Query {
-    usuarios: [Usuario]
-  }
-
-`
+import { typeDefs } from './graphql/schema.js'
 
 // 2. IMPLEMENTA OS RESOLVERS
-const resolvers = {
-  Query: {}
-}
+import { resolvers } from './graphql/resolvers.js'
 
 // 3. CRIAR UM INSTÂNCIA DO APOLLO SERVER
 const server = new ApolloServer({ typeDefs, resolvers })

@@ -1,6 +1,8 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config()
 
 export default {
+
   client: 'postgresql',
   connection: {
     database: 'curso_graphql',
@@ -12,6 +14,9 @@ export default {
     max: 10
   },
   migrations: {
+    directory: './src/migrations',
+    esm: true,
     tableName: 'knex_migrations'
   }
+
 }

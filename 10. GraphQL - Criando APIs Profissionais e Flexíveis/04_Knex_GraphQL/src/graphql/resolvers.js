@@ -1,9 +1,16 @@
 import { dataBase } from '../db/db_curso_graphql.js'
 
-const buscarPerfil = async(filtro) => {
-  return await dataBase('perfis').where({ id: filtro.id }).first()
+const buscarPerfil = (filtro) => {
+  return dataBase('perfis').where({ id: filtro.id }).first()
 }
-//const buscarUsuario = async(filtro) => {}
+const buscarUsuario = (filtro) => {
+  const { id, nome } = filtro
+  if(id) {
+    return dataBase('usuarios').where({ id }).first()
+  } else {
+    return filtro.nome ? dataBase('usuarios').where({ nome }).first() : null
+  }
+}
 
 export const resolvers = {
 
@@ -27,14 +34,7 @@ export const resolvers = {
 
     // TABELA USUÁRIOS
     usuarios: () => dataBase('usuarios'),
-    usuario: (_, { filtro }) => {
-      const { id, nome } = filtro
-      if(id) {
-        return dataBase('usuarios').where({ id }).first()
-      } else {
-        return filtro.nome ? dataBase('usuarios').where({ nome }).first() : null
-      }
-    },
+    usuario: (_, { filtro }) => buscarUsuario(filtro),
 
     // TABELA PERFIS
     perfis: () => dataBase('perfis'),

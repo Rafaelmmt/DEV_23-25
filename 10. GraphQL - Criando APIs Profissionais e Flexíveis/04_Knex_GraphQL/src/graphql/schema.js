@@ -12,6 +12,12 @@ export const typeDefs = `#graphql
     id: Int
     nome: String
   }
+  
+  input UsuarioInput {
+    nome: String!
+    email: String!
+    senha: String!
+  }
 
   # PERFIL
   type Perfil {
@@ -32,8 +38,9 @@ export const typeDefs = `#graphql
 
   # MUTATION
   type Mutation {
-    novoPerfil(dados: PerfilInput): Perfil
+    criarPerfil(dados: PerfilInput): Perfil
     editarPerfil(filtro:IdPerfil!, dados:PerfilInput!): Perfil
+    criarUsuario(dados: UsuarioInput!): Usuario
   }
 
   ##### QUERY #####

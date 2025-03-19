@@ -44,7 +44,7 @@ export const resolvers = {
   Mutation: {
 
     // PERFIL
-    novoPerfil: async (_, { dados }) => {
+    criarPerfil: async (_, { dados }) => {
       try {
         // Inserir o registro
         await dataBase('perfis').insert(dados)
@@ -80,6 +80,19 @@ export const resolvers = {
 
 
     // USUARIO
+    criarUsuario: async (_, { dados }) => {
+      try {
+        // Insere o Usuário e obtêm o ID
+        const [{ id }] = await dataBase('usuarios').insert(dados).returning('id')
+        // Cria relação padrão de Usuário-Perfil
+        await dataBase('usuario_perfil').insert({ usuario_id: id, perfil_id: 1 })
+        // Retorna o usuário criado
+        const newUser = await dataBase('usuarios').where({ id }).first()
+        return newUser
+      } catch (e) {
+        throw new Error(`Erro ao criar usuário: ${e.message}`)
+      }
+    },
 
   }
 

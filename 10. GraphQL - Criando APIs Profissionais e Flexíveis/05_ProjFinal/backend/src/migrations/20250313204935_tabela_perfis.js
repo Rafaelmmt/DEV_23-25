@@ -6,8 +6,7 @@ export function up(knex) {
   }).then(function() {
     return knex('perfis').insert([
       { nome: 'comum', rotulo: 'Comum' },
-      { nome: 'admin', rotulo: 'Administrador' },
-      { nome: 'master', rotulo: 'Master' }
+      { nome: 'admin', rotulo: 'Administrador' }
     ])
   })
 }

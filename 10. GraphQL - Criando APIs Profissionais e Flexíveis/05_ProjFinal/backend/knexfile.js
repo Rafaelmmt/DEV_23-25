@@ -2,12 +2,13 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export default {
-
   client: 'postgresql',
   connection: {
-    database: 'curso_graphql',
-    user: process.env.user,
-    password: process.env.password
+    host: process.env.APP_DB_HOST,
+    port: process.env.APP_DB_PORT,
+    database: process.env.APP_DB_NAME,
+    user: process.env.APP_DB_USER,
+    password: process.env.APP_DB_PASSWORD
   },
   pool: {
     min: 2,
@@ -18,5 +19,4 @@ export default {
     esm: true,
     tableName: 'knex_migrations'
   }
-
 }

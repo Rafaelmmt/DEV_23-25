@@ -22,6 +22,17 @@ export const resolvers = {
     product: (parent, { id }, context) => products.find((obj) => obj.id === id),
     categories: () => categories,
     category: (parent, { id }) => categories.find((obj) => obj.id === id)
+  }, 
+
+  Mutation: {
+    addCategory: (parent, { input }) => {
+      const newCategory = {
+        id: categories.length + 1,
+        ...input
+      }
+      categories.push(newCategory)
+      return newCategory
+    }
   }
 
 }

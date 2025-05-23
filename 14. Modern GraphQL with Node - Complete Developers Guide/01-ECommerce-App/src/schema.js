@@ -30,12 +30,31 @@ export const typeDefs = `#graphql
     onSale: Boolean!
   }
 
+  input CategoryInput {
+    name: String!
+  }
+
+  input ProductInput {
+    name: String!
+    description: String!
+    quantity: Int!
+    image: String!
+    price: Float!
+    onSale: Boolean!
+    categoryId: ID!
+  }
+
   type Query {
     hello: String
     products(filter:ProductsFilterInput): [Product!]!
     product(id:ID!): Product
     categories: [Category!]!
     category(id: ID!): Category
+  }
+
+  type Mutation {
+    addCategory(input: CategoryInput): Category!
+    addProduct(input: ProductInput): Product!
   }
 
 `
